@@ -131,22 +131,6 @@ export default function SkillsSection() {
           );
         })}
       </div>
-
-      {/* 3D Viewport Interaction Reminder */}
-      <div className="mt-12 glass-panel p-4 sm:p-5 rounded-2xl border border-cyber-cyan/30 flex items-center justify-between flex-wrap gap-4">
-        <div className="flex items-center gap-3">
-          <Sparkles className="w-5 h-5 text-cyber-cyan animate-pulse shrink-0" />
-          <span className="text-xs sm:text-sm font-mono text-slate-200">
-            Interactive 3D Skill Polyhedrals (Blender, Three.js, Unity, Gemini) are floating in the 3D Universe viewport above!
-          </span>
-        </div>
-        <a
-          href="#home"
-          className="text-xs font-mono text-cyber-cyan hover:underline flex items-center gap-1 font-semibold"
-        >
-          <span>VIEW 3D CANVAS &uarr;</span>
-        </a>
-      </div>
     </section>
   );
 }

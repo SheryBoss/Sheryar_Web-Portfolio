@@ -76,17 +76,6 @@ export default function UniverseCanvas() {
 
   return (
     <div className="absolute inset-0 w-full h-full pointer-events-auto">
-      {/* 3D Viewport Controls HUD Overlay */}
-      <div className="absolute top-20 right-6 z-20 flex items-center gap-2 pointer-events-auto">
-        <button
-          onClick={() => setViewMode(viewMode === 'avatar' ? 'stage' : 'avatar')}
-          className="px-3 py-1.5 rounded-lg text-[10px] font-mono font-bold bg-space-card/80 border border-cyber-cyan/40 hover:border-cyber-cyan text-cyber-cyan backdrop-blur-md shadow-glow-subtle transition-all"
-          title="Toggle 3D View Mode"
-        >
-          {viewMode === 'avatar' ? '3D AVATAR: ACTIVE [SWITCH TO STAGE]' : '3D STAGE: ACTIVE [SWITCH TO AVATAR]'}
-        </button>
-      </div>
-
       <Canvas
         camera={{ position: [0, 1.3, 5.0], fov: 45 }}
         dpr={[1, 1.5]}
@@ -127,13 +116,9 @@ export default function UniverseCanvas() {
         {/* Core Glowing Pedestal */}
         <GlowingPlatform />
 
-        {/* 3D Content: Sheryar's Avatar (with Click-to-Wave) or Wireframe Stage */}
+        {/* 3D Content: Sheryar's Avatar (with Click-to-Wave & Cursor Tracking) */}
         <Suspense fallback={<StageLoadingFallback />}>
-          {viewMode === 'avatar' ? (
-            <Avatar3D />
-          ) : (
-            <AvatarStage3D />
-          )}
+          <Avatar3D />
           <FloatingSkills />
         </Suspense>
       </Canvas>

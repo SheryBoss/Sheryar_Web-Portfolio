@@ -11,7 +11,7 @@ export default function PromotionalVideoSection() {
 
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(30);
+  const [duration, setDuration] = useState(40);
   const [volume, setVolume] = useState(0.8);
   const [isMuted, setIsMuted] = useState(false);
   const [videoError, setVideoError] = useState(null);
@@ -95,7 +95,7 @@ export default function PromotionalVideoSection() {
           PROMOTIONAL <span className="text-cyber-cyan glow-text-cyan">VIDEO</span>
         </h2>
         <p className="text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
-          30-second promotional motion graphics trailer encoded in standard H.264 (yuv420p) progressive format. Click anywhere on the player to start playback.
+          40-second promotional motion graphics trailer encoded in standard H.264 (yuv420p) progressive format. Click anywhere on the player to start playback.
         </p>
       </div>
 
@@ -112,7 +112,7 @@ export default function PromotionalVideoSection() {
               <div>
                 <div className="text-xs font-mono font-bold text-cyber-cyan uppercase tracking-wider flex items-center gap-2">
                   <Film className="w-3.5 h-3.5 text-cyber-cyan" />
-                  <span>AFTER EFFECTS 30s PROMOTIONAL TRAILER</span>
+                  <span>AFTER EFFECTS 40s PROMOTIONAL TRAILER</span>
                 </div>
                 <div className="text-[10px] font-mono text-slate-400">
                   H.264 AVC1 &bull; 1280x720 &bull; 30 FPS &bull; FASTSTART PROGRESSIVE
@@ -179,7 +179,7 @@ export default function PromotionalVideoSection() {
               <input
                 type="range"
                 min="0"
-                max={duration || 30}
+                max={duration || 40}
                 step="0.1"
                 value={currentTime}
                 onChange={handleSeek}

@@ -59,7 +59,7 @@ export default function EducationExperienceSection() {
                       {item.institution}
                     </div>
                     <div className="text-xs font-mono text-cyber-violet mt-0.5">
-                      {item.specialization} &bull; CGPA: {item.cgpa}
+                      {item.specialization} &bull; {item.gradeLabel || (item.degree.includes('Intermediate') ? 'Percentage' : 'CGPA')}: {item.grade || item.cgpa}
                     </div>
                   </div>
 

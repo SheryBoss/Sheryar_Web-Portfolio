@@ -288,6 +288,8 @@ export const EDUCATION_TIMELINE = [
     institution: "NED University of Engineering & Technology (NEDUET)",
     specialization: "Specialization in Gaming & Animation",
     currentStatus: "4th Year Standing • Batch 2023-2027",
+    gradeLabel: "CGPA",
+    grade: "3.5 / 4.00",
     cgpa: "3.5 / 4.00",
     highlights: [
       "Core Foundations: Object-Oriented Programming (OOP), Data Structures & Algorithms (DSA), Database Management Systems (DBMS).",
@@ -302,7 +304,9 @@ export const EDUCATION_TIMELINE = [
     institution: "DJ Sindh Govt Science College",
     specialization: "Mathematics, Physics, Chemistry",
     currentStatus: "Completed",
-    cgpa: "84.0% Grade",
+    gradeLabel: "Percentage",
+    grade: "84.0%",
+    cgpa: "84.0%",
     highlights: [
       "Rigorous pre-engineering foundation in advanced mathematics, analytical calculus, and classical physics.",
       "Academic distinction from one of Karachi's premier historic science institutions.",

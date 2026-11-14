@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { X, Send, Bot, Sparkles, User, ShieldCheck, CornerDownLeft, Loader2, BookOpen } from 'lucide-react';
 import { FAQ_PROMPTS } from '../../data/portfolioData';
+import { findBestKnowledgeAnswer } from '../../data/knowledgeBase';
 
 /**
  * ChatbotHUD - RAG Autonomous AI Companion (A.R.I.A.)
@@ -69,12 +70,13 @@ export default function ChatbotHUD({ isOpen, onClose }) {
         throw new Error(data.error || 'Server returned an error');
       }
     } catch (err) {
-      // Offline/Local Grounded Knowledge Fallback Response
+      // Offline/Local Grounded Knowledge Fallback Response from README.md
+      const groundedText = findBestKnowledgeAnswer(textToSend) || generateOfflineGroundedResponse(textToSend);
       const botFallback = {
         id: Date.now() + 1,
         sender: 'bot',
-        text: generateOfflineGroundedResponse(textToSend),
-        sources: ['personal_faq.md (Local Vector Cache)'],
+        text: groundedText,
+        sources: ['README.md (Verified Knowledge Base)'],
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
       };
       setMessages((prev) => [...prev, botFallback]);

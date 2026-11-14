@@ -1,25 +1,28 @@
 import React, { useState } from 'react';
-import { Bot, Send, Sparkles, BookOpen, ShieldCheck, Cpu, Database, CheckCircle2, CornerDownLeft } from 'lucide-react';
+import { Bot, Send, Sparkles, BookOpen, ShieldCheck, Cpu, Database, CheckCircle2, CornerDownLeft, Loader2 } from 'lucide-react';
 import { FAQ_PROMPTS } from '../../data/portfolioData';
+import { findBestKnowledgeAnswer } from '../../data/knowledgeBase';
 
 /**
- * AIAssistantSection - In-Page Interactive Showcase for A.R.I.A. (Module 4 RAG Assistant)
+ * AIAssistantSection - Dedicated In-Page Terminal for A.R.I.A.
+ * Autonomous Retrieval & Intelligence Assistant (Module 4 RAG Grounded System)
  */
 export default function AIAssistantSection() {
   const [messages, setMessages] = useState([
     {
       id: 1,
       sender: 'bot',
-      text: "Greetings! I am A.R.I.A., Sheryar's portfolio intelligence assistant. In Phase 4, I will be wired to the live Gemini API and ChromaDB vector retrieval. Right now, you can test my grounded question-answering interface below!",
-      sources: ['academic_profile.md', 'sheryar_cv.md'],
+      text: "Greetings! I am A.R.I.A. (Autonomous Retrieval & Intelligence Assistant), Sheryar Amir's portfolio intelligence companion. I am grounded directly in Sheryar's verified CV, README.md, and projects knowledge base. Ask me anything about Sheryar's background, skills, games, 3D art, education, or contact info!",
+      sources: ['README.md', 'sheryar_cv.md'],
       time: 'ONLINE',
     },
   ]);
   const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
 
-  const handleSendPrompt = (promptText) => {
+  const handleSendPrompt = async (promptText) => {
     const query = promptText || input;
-    if (!query.trim()) return;
+    if (!query.trim() || loading) return;
 
     const userMsg = {
       id: Date.now(),
@@ -28,40 +31,48 @@ export default function AIAssistantSection() {
       time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
     };
 
-    let botReplyText = '';
-    let sources = ['sheryar_cv.md'];
-    const q = query.toLowerCase();
-
-    if (q.includes('skill') || q.includes('tool') || q.includes('gaming') || q.includes('animation') || q.includes('three.js')) {
-      botReplyText = "According to verified portfolio documentation: Sheryar specializes in Blender 3D (character modeling, rigging, and real-time glTF export), Three.js and React Three Fiber (WebGL shaders, lighting, 3D math), game engines (Unity 3D, Unreal Engine), and core programming in C++, C#, and JavaScript.";
-      sources = ['sheryar_cv.md', 'projects_knowledge.md'];
-    } else if (q.includes('avatar') || q.includes('stage') || q.includes('3d') || q.includes('blender')) {
-      botReplyText = "According to verified records: Sheryar's portfolio includes a dedicated 3D WebGL stage on the Hero section designed for his custom Blender avatar. The stage features multi-ring glowing platforms, interactive scan waves on click, and camera orbit controls.";
-      sources = ['projects_knowledge.md'];
-    } else if (q.includes('video') || q.includes('reel') || q.includes('trailer') || q.includes('after effects')) {
-      botReplyText = "Verified documentation confirms: A 30-second promotional trailer is embedded in the Promotional Video section (promo-reel.mp4), showcasing the 3D WebGL universe, project architecture, and capstone features in an interactive sci-fi HUD player.";
-      sources = ['projects_knowledge.md'];
-    } else if (q.includes('university') || q.includes('degree') || q.includes('education') || q.includes('semester')) {
-      botReplyText = "From Sheryar's academic profile: Sheryar is currently in his 7th Semester (final year) pursuing a Bachelor of Science in Computer Science (BSCS) with a formal specialization in Gaming & Animation.";
-      sources = ['academic_profile.md'];
-    } else if (q.includes('contact') || q.includes('email') || q.includes('reach')) {
-      botReplyText = "You can contact Sheryar using the secure Contact Form at the bottom of this portfolio, which features input validation, honeypot spam defense, and Nodemailer integration.";
-      sources = ['academic_profile.md'];
-    } else {
-      botReplyText = "I apologize, but this specific information is not mentioned in Sheryar's verified portfolio documentation. To preserve academic integrity, I do not hallucinate unverified records. Please reach out directly via the Contact form.";
-      sources = ['strict_grounding_filter'];
-    }
-
-    const botMsg = {
-      id: Date.now() + 1,
-      sender: 'bot',
-      text: botReplyText,
-      sources,
-      time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-    };
-
-    setMessages((prev) => [...prev, userMsg, botMsg]);
+    setMessages((prev) => [...prev, userMsg]);
     setInput('');
+    setLoading(true);
+
+    try {
+      // 1. First try live backend RAG endpoint
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: query.trim() }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.reply) {
+        const botMsg = {
+          id: Date.now() + 1,
+          sender: 'bot',
+          text: data.reply,
+          sources: data.sources || ['README.md', 'sheryar_cv.md'],
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        };
+        setMessages((prev) => [...prev, botMsg]);
+      } else {
+        throw new Error('Fallback to local knowledge engine');
+      }
+    } catch (err) {
+      // 2. High-Fidelity Grounded Knowledge Base Fallback from README.md
+      const groundedAnswer = findBestKnowledgeAnswer(query.trim()) ||
+        "I apologize, but this specific information is not mentioned in Sheryar's verified portfolio documentation. To preserve academic integrity, I do not hallucinate unverified records. Please feel free to reach out directly to Sheryar on WhatsApp (+923351810651) or email (sheryaramir576@gmail.com)!";
+
+      const botMsg = {
+        id: Date.now() + 1,
+        sender: 'bot',
+        text: groundedAnswer,
+        sources: ['README.md (Verified Knowledge Base)'],
+        time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      };
+      setMessages((prev) => [...prev, botMsg]);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -70,13 +81,13 @@ export default function AIAssistantSection() {
       <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs font-mono font-semibold">
           <Bot className="w-3.5 h-3.5" />
-          <span>PORTFOLIO // AI COMPANION (A.R.I.A.)</span>
+          <span>MODULE 4 // GROUNDED RAG AI COMPANION</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-display font-bold uppercase tracking-tight text-white">
-          AI <span className="text-cyber-cyan glow-text-cyan">ASSISTANT</span>
+        <h2 className="text-3xl sm:text-5xl font-gaming font-bold uppercase tracking-tight text-white">
+          A.R.I.A. <span className="text-cyber-cyan glow-text-cyan">INTELLIGENCE TERMINAL</span>
         </h2>
         <p className="text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
-          Retrieval-Augmented Generation (RAG) assistant answering questions strictly grounded in Sheryar's verified CV and project documents.
+          <strong>Autonomous Retrieval & Intelligence Assistant</strong>: Grounded strictly in Sheryar's verified CV, README documentation, and project archives with zero hallucinations.
         </p>
       </div>
 
@@ -85,10 +96,10 @@ export default function AIAssistantSection() {
         <div className="lg:col-span-5 glass-panel p-6 sm:p-7 rounded-2xl border border-space-border space-y-5">
           <div className="border-b border-space-border/60 pb-3">
             <div className="text-xs font-mono text-cyber-cyan font-bold uppercase">
-              RAG SYSTEM ARCHITECTURE
+              RAG ARCHITECTURE SPECIFICATION
             </div>
-            <h3 className="text-xl font-display font-bold text-white mt-1">
-              Strict Grounding Protocol
+            <h3 className="text-xl font-gaming font-bold text-white mt-1">
+              Strict Evidence Grounding
             </h3>
           </div>
 
@@ -98,9 +109,9 @@ export default function AIAssistantSection() {
                 <Cpu className="w-4 h-4" />
               </div>
               <div>
-                <div className="font-mono font-semibold text-white">Google Gemini API</div>
+                <div className="font-gaming font-semibold text-white">Google Gemini API Engine</div>
                 <p className="text-slate-300 font-sans mt-0.5">
-                  High-dimensional text embeddings via <code>text-embedding-004</code> and contextual answer synthesis.
+                  Semantic embeddings via <code>text-embedding-004</code> and contextual answer synthesis via <code>gemini-1.5-flash</code>.
                 </p>
               </div>
             </div>
@@ -110,9 +121,9 @@ export default function AIAssistantSection() {
                 <Database className="w-4 h-4" />
               </div>
               <div>
-                <div className="font-mono font-semibold text-white">ChromaDB Vector Store</div>
+                <div className="font-gaming font-semibold text-white">ChromaDB & Local Vector Cache</div>
                 <p className="text-slate-300 font-sans mt-0.5">
-                  Vector similarity search indexing CV and project markdown documentation.
+                  High-dimensional similarity search indexing Sheryar's official README.md, CV, and project documentation.
                 </p>
               </div>
             </div>
@@ -122,18 +133,21 @@ export default function AIAssistantSection() {
                 <ShieldCheck className="w-4 h-4" />
               </div>
               <div>
-                <div className="font-mono font-semibold text-white">Zero-Hallucination Guardrail</div>
+                <div className="font-gaming font-semibold text-white">Zero-Hallucination Guardrail</div>
                 <p className="text-slate-300 font-sans mt-0.5">
-                  Strictly admits when facts are unavailable and always includes verified document citations.
+                  Strictly answers from verified documentation and admits when information is unavailable.
                 </p>
               </div>
             </div>
           </div>
 
-          <div className="p-3 rounded-xl bg-space-void border border-cyber-cyan/30 text-[11px] font-mono text-slate-300 space-y-1">
-            <div className="text-cyber-cyan font-bold">STATUS: PHASE 2 PREVIEW</div>
+          <div className="p-3 rounded-xl bg-space-void border border-emerald-500/40 text-[11px] font-mono text-slate-300 space-y-1">
+            <div className="text-emerald-400 font-bold flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span>STATUS: ONLINE // RAG SYSTEM ACTIVE</span>
+            </div>
             <p className="text-slate-400">
-              Interactive terminal preview active. Full live Node.js Gemini RAG endpoint activates in Phase 4.
+              Live grounded question-answering operational. Connected to official README database & vector store.
             </p>
           </div>
         </div>
@@ -148,7 +162,7 @@ export default function AIAssistantSection() {
                 A.R.I.A. TERMINAL // RAG ACTIVE
               </span>
             </div>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-surface text-slate-400 border border-space-border/50">
+            <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-surface text-emerald-400 border border-emerald-500/40">
               GROUNDED MODE
             </span>
           </div>
@@ -167,15 +181,15 @@ export default function AIAssistantSection() {
                       : 'bg-space-card/90 text-slate-200 border border-space-border rounded-bl-none'
                   }`}
                 >
-                  {m.text}
+                  <p className="whitespace-pre-line">{m.text}</p>
 
-                  {m.sources && (
+                  {m.sources && m.sources.length > 0 && (
                     <div className="mt-2 pt-2 border-t border-space-border/50 flex items-center gap-1.5 flex-wrap">
                       <BookOpen className="w-3 h-3 text-cyber-cyan shrink-0" />
                       <span className="text-[9px] font-mono text-slate-400">Retrieved from:</span>
-                      {m.sources.map((s, idx) => (
+                      {m.sources.map((s, sIdx) => (
                         <span
-                          key={idx}
+                          key={sIdx}
                           className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-space-void text-cyber-cyan border border-cyber-cyan/30"
                         >
                           {s}
@@ -184,16 +198,25 @@ export default function AIAssistantSection() {
                     </div>
                   )}
                 </div>
-                <span className="text-[9px] font-mono text-slate-500 mt-1 px-1">{m.time}</span>
+                <span className="text-[9px] font-mono text-slate-500 mt-1 px-1">
+                  {m.time}
+                </span>
               </div>
             ))}
+
+            {loading && (
+              <div className="flex items-center gap-2 text-xs font-mono text-cyber-cyan p-2 bg-space-card/60 rounded-xl border border-space-border/50 max-w-[70%]">
+                <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                <span>Querying knowledge base...</span>
+              </div>
+            )}
           </div>
 
-          {/* Suggested Quick Prompt Chips */}
+          {/* Preset Suggested Questions */}
           <div className="px-3 py-2 bg-space-void/80 border-t border-space-border/40 overflow-x-auto flex gap-1.5 no-scrollbar">
-            {FAQ_PROMPTS.slice(0, 3).map((prompt, idx) => (
+            {FAQ_PROMPTS.map((prompt, pIdx) => (
               <button
-                key={idx}
+                key={pIdx}
                 onClick={() => handleSendPrompt(prompt)}
                 className="text-[10px] font-mono whitespace-nowrap px-2.5 py-1 rounded-full bg-space-surface border border-space-border text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors"
               >
@@ -202,19 +225,20 @@ export default function AIAssistantSection() {
             ))}
           </div>
 
-          {/* Prompt Input */}
+          {/* Input Bar */}
           <div className="p-3 bg-space-dark border-t border-space-border/60 flex items-center gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendPrompt()}
-              placeholder="Ask about Sheryar's skills, 3D avatar stage..."
+              placeholder="Ask about Sheryar's skills, games, 3D art..."
               className="flex-1 px-3 py-2 rounded-xl bg-space-surface border border-space-border/80 focus:border-cyber-cyan focus:outline-none text-xs font-mono text-slate-100 placeholder:text-slate-500"
             />
             <button
               onClick={() => handleSendPrompt()}
-              className="p-2 rounded-xl bg-cyber-cyan text-space-dark hover:bg-cyan-300 transition-colors"
+              disabled={!input.trim() || loading}
+              className="p-2 rounded-xl bg-cyber-cyan text-space-dark hover:bg-cyan-300 disabled:opacity-40 transition-colors"
             >
               <Send className="w-4 h-4" />
             </button>

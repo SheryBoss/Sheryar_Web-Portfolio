@@ -20,6 +20,8 @@ export default function ContactSection() {
     error: null,
   });
 
+  const [lastTranscript, setLastTranscript] = useState(null);
+
   const handleChange = (e) => {
     setFormData((prev) => ({
       ...prev,
@@ -56,28 +58,32 @@ export default function ContactSection() {
       return;
     }
 
+    const submission = { ...formData };
+    setLastTranscript(submission);
     setStatus({ submitting: true, success: false, error: null });
+
+    // Construct direct mailto dispatch URL for Sheryar's inbox
+    const mailtoSub = encodeURIComponent(`[Portfolio Transmission] ${submission.subject || 'Inquiry'} from ${submission.name}`);
+    const mailtoBody = encodeURIComponent(
+      `Hello Sheryar,\n\nName: ${submission.name}\nEmail: ${submission.email}\nSubject: ${submission.subject}\n\nMessage:\n${submission.message}\n\n---\nDirect transmission to: sheryaramir576@gmail.com`
+    );
+    const directMailtoUrl = `mailto:sheryaramir576@gmail.com?subject=${mailtoSub}&body=${mailtoBody}`;
 
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(submission),
       });
 
-      if (response.ok) {
-        setStatus({ submitting: false, success: true, error: null });
-        setFormData({ name: '', email: '', subject: '', message: '', _honey: '' });
-      } else {
-        // Safe fallback in test mode
-        setStatus({ submitting: false, success: true, error: null });
-        setFormData({ name: '', email: '', subject: '', message: '', _honey: '' });
-      }
+      setStatus({ submitting: false, success: true, error: null });
+      setFormData({ name: '', email: '', subject: '', message: '', _honey: '' });
+      // Direct email client trigger
+      window.open(directMailtoUrl, '_blank');
     } catch (err) {
-      setTimeout(() => {
-        setStatus({ submitting: false, success: true, error: null });
-        setFormData({ name: '', email: '', subject: '', message: '', _honey: '' });
-      }, 500);
+      setStatus({ submitting: false, success: true, error: null });
+      setFormData({ name: '', email: '', subject: '', message: '', _honey: '' });
+      window.open(directMailtoUrl, '_blank');
     }
   };
 
@@ -233,16 +239,46 @@ export default function ContactSection() {
                 Transmission Received!
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 font-sans max-w-md mx-auto">
-                Thank you! Your message has been received. You can also chat directly on WhatsApp at{' '}
-                <a href={PLACEHOLDERS.WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="text-emerald-400 font-mono underline">
-                  {PLACEHOLDERS.WHATSAPP_NUMBER}
-                </a>.
+                Thank you! Your message transcript is addressed directly to <strong className="text-cyber-cyan">sheryaramir576@gmail.com</strong>.
               </p>
+
+              {lastTranscript && (
+                <div className="p-3 bg-space-void/80 rounded-xl border border-cyber-cyan/30 text-left text-xs font-mono text-slate-300 space-y-1 max-w-md mx-auto">
+                  <div><span className="text-cyber-cyan">SENDER:</span> {lastTranscript.name} ({lastTranscript.email})</div>
+                  <div><span className="text-cyber-cyan">SUBJECT:</span> {lastTranscript.subject || 'Portfolio Inquiry'}</div>
+                  <div className="line-clamp-2 text-slate-400"><span className="text-cyber-cyan">MESSAGE:</span> {lastTranscript.message}</div>
+                </div>
+              )}
+
+              <div className="pt-2 flex flex-wrap justify-center gap-3">
+                {lastTranscript && (
+                  <a
+                    href={`mailto:sheryaramir576@gmail.com?subject=${encodeURIComponent(`[Portfolio Transmission] ${lastTranscript.subject || 'Inquiry'} from ${lastTranscript.name}`)}&body=${encodeURIComponent(`Hello Sheryar,\n\nName: ${lastTranscript.name}\nEmail: ${lastTranscript.email}\nSubject: ${lastTranscript.subject}\n\nMessage:\n${lastTranscript.message}\n\n---\nSent from Developer's Universe`)}`}
+                    className="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold text-space-dark bg-cyber-cyan hover:bg-cyan-300 transition-colors flex items-center gap-1.5"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span>OPEN IN MAIL CLIENT</span>
+                  </a>
+                )}
+                <a
+                  href={PLACEHOLDERS.WHATSAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-xl text-xs font-mono font-semibold text-emerald-300 bg-emerald-950/60 border border-emerald-500 hover:bg-emerald-500 hover:text-black transition-colors flex items-center gap-1.5"
+                >
+                  <span>💬</span>
+                  <span>WHATSAPP (+923351810651)</span>
+                </a>
+              </div>
+
               <button
-                onClick={() => setStatus({ submitting: false, success: false, error: null })}
-                className="mt-4 px-5 py-2.5 rounded-xl text-xs font-mono font-semibold text-space-dark bg-cyber-cyan hover:bg-cyan-300 transition-colors"
+                onClick={() => {
+                  setStatus({ submitting: false, success: false, error: null });
+                  setLastTranscript(null);
+                }}
+                className="mt-2 text-xs font-mono text-slate-400 hover:text-white underline block mx-auto"
               >
-                SEND ANOTHER MESSAGE
+                Send Another Transmission
               </button>
             </div>
           ) : (

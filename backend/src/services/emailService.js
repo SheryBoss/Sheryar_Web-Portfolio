@@ -35,7 +35,7 @@ export function initializeEmailService() {
  * Dispatch Contact Inquiry Email (Module 5)
  */
 export async function sendContactEmail({ name, email, subject, message }) {
-  const receiver = process.env.CONTACT_RECEIVER_EMAIL || process.env.SMTP_USER || 'sheryar.developer@example.com';
+  const receiver = process.env.CONTACT_RECEIVER_EMAIL || process.env.SMTP_USER || 'sheryaramir576@gmail.com';
   const timestamp = new Date().toISOString();
 
   const htmlContent = `
