@@ -86,34 +86,34 @@ export default function AboutSection() {
             </p>
 
             {/* Why NED University Highlight Box */}
-            <div className="p-4 rounded-xl bg-space-void/90 border border-cyber-cyan/30 space-y-1.5">
-              <div className="flex items-center gap-2 text-xs font-gaming font-bold text-cyber-cyan uppercase tracking-wider">
-                <Compass className="w-4 h-4 text-cyber-cyan" />
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-space-void/90 border border-sky-300 dark:border-cyber-cyan/30 space-y-1.5 shadow-sm dark:shadow-none">
+              <div className="flex items-center gap-2 text-xs font-gaming font-bold text-sky-700 dark:text-cyber-cyan uppercase tracking-wider">
+                <Compass className="w-4 h-4 text-sky-600 dark:text-cyber-cyan" />
                 <span>WHY NED UNIVERSITY?</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 I got admitted to NED University because of my deep thirst for knowledge about software development and creative designing, specifically in the field of gaming. This program allowed me to blend rigorous engineering with artistic 3D expression.
               </p>
             </div>
 
             {/* Future Startup Vision Box */}
-            <div className="p-4 rounded-xl bg-space-void/90 border border-cyber-violet/30 space-y-1.5">
-              <div className="flex items-center gap-2 text-xs font-gaming font-bold text-cyber-violet uppercase tracking-wider">
-                <Rocket className="w-4 h-4 text-cyber-violet" />
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-space-void/90 border border-purple-300 dark:border-cyber-violet/30 space-y-1.5 shadow-sm dark:shadow-none">
+              <div className="flex items-center gap-2 text-xs font-gaming font-bold text-purple-700 dark:text-cyber-violet uppercase tracking-wider">
+                <Rocket className="w-4 h-4 text-purple-600 dark:text-cyber-violet" />
                 <span>FUTURE VISION & STARTUP ASPIRATIONS</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 My primary ambition after completing my degree is to build my own startup in <strong>Game Development</strong>, establishing an independent studio that designs mechanically rich indie games, physics simulations, and immersive 3D experiences.
               </p>
             </div>
 
             {/* Hobbies & Personal Interests */}
-            <div className="p-4 rounded-xl bg-space-void/90 border border-emerald-500/30 space-y-1.5">
-              <div className="flex items-center gap-2 text-xs font-gaming font-bold text-emerald-400 uppercase tracking-wider">
-                <Heart className="w-4 h-4 text-emerald-400" />
+            <div className="p-4 rounded-xl bg-slate-100 dark:bg-space-void/90 border border-emerald-300 dark:border-emerald-500/30 space-y-1.5 shadow-sm dark:shadow-none">
+              <div className="flex items-center gap-2 text-xs font-gaming font-bold text-emerald-700 dark:text-emerald-400 uppercase tracking-wider">
+                <Heart className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                 <span>HOBBIES & PERSONAL INTERESTS</span>
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed font-sans">
+              <p className="text-xs text-slate-700 dark:text-slate-300 leading-relaxed font-sans">
                 Reading, practicing 3D modelling and sculpting in Blender, swimming, playing table tennis, cricket, and chess.
               </p>
             </div>

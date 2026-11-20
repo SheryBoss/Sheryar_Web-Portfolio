@@ -158,27 +158,27 @@ export default function ProjectsSection() {
               {/* Content Body */}
               <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
                 <div className="space-y-2">
-                  <h3 className="text-xl font-gaming font-bold text-white group-hover:text-cyber-cyan transition-colors">
+                  <h3 className="text-xl font-gaming font-bold text-slate-900 dark:text-white group-hover:text-cyber-cyan transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-sans line-clamp-3">
+                  <p className="text-xs sm:text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-sans line-clamp-3">
                     {project.summary}
                   </p>
                 </div>
 
                 {/* Tags & Action Bar */}
-                <div className="space-y-4 pt-4 border-t border-space-border/40">
+                <div className="space-y-4 pt-4 border-t border-slate-200 dark:border-space-border/40">
                   <div className="flex flex-wrap gap-1.5">
                     {project.tags.slice(0, 4).map((tag, tIdx) => (
                       <span
                         key={tIdx}
-                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-space-surface text-slate-300 border border-space-border/60"
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-slate-100 dark:bg-space-surface text-slate-700 dark:text-slate-300 border border-slate-300 dark:border-space-border/60 shadow-sm dark:shadow-none"
                       >
                         {tag}
                       </span>
                     ))}
                     {project.tags.length > 4 && (
-                      <span className="text-[10px] font-mono px-1.5 py-0.5 text-slate-400">
+                      <span className="text-[10px] font-mono px-1.5 py-0.5 text-slate-500 dark:text-slate-400">
                         +{project.tags.length - 4} more
                       </span>
                     )}
@@ -200,7 +200,7 @@ export default function ProjectsSection() {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={(e) => e.stopPropagation()}
-                      className="p-2.5 rounded-xl bg-space-surface border border-space-border hover:border-cyber-cyan text-slate-300 hover:text-white transition-colors"
+                      className="p-2.5 rounded-xl bg-slate-100 dark:bg-space-surface border border-slate-300 dark:border-space-border hover:border-cyber-cyan text-slate-700 dark:text-slate-300 hover:text-black dark:hover:text-white transition-colors shadow-sm dark:shadow-none"
                       title="View GitHub Repository"
                     >
                       <Github className="w-4 h-4" />

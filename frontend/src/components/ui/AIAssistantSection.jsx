@@ -178,19 +178,19 @@ export default function AIAssistantSection() {
                   className={`max-w-[85%] rounded-2xl p-3 text-xs leading-relaxed font-sans ${
                     m.sender === 'user'
                       ? 'bg-cyber-violet text-white rounded-br-none shadow-glow-violet'
-                      : 'bg-space-card/90 text-slate-200 border border-space-border rounded-bl-none'
+                      : 'bg-white dark:bg-space-card/90 text-slate-800 dark:text-slate-200 border border-slate-300 dark:border-space-border rounded-bl-none shadow-sm dark:shadow-none'
                   }`}
                 >
                   <p className="whitespace-pre-line">{m.text}</p>
 
                   {m.sources && m.sources.length > 0 && (
-                    <div className="mt-2 pt-2 border-t border-space-border/50 flex items-center gap-1.5 flex-wrap">
-                      <BookOpen className="w-3 h-3 text-cyber-cyan shrink-0" />
-                      <span className="text-[9px] font-mono text-slate-400">Retrieved from:</span>
+                    <div className="mt-2 pt-2 border-t border-slate-200 dark:border-space-border/50 flex items-center gap-1.5 flex-wrap">
+                      <BookOpen className="w-3 h-3 text-sky-600 dark:text-cyber-cyan shrink-0" />
+                      <span className="text-[9px] font-mono text-slate-500 dark:text-slate-400">Retrieved from:</span>
                       {m.sources.map((s, sIdx) => (
                         <span
                           key={sIdx}
-                          className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-space-void text-cyber-cyan border border-cyber-cyan/30"
+                          className="text-[9px] font-mono px-1.5 py-0.2 rounded bg-sky-100 dark:bg-space-void text-sky-800 dark:text-cyber-cyan border border-sky-300 dark:border-cyber-cyan/30"
                         >
                           {s}
                         </span>
@@ -205,7 +205,7 @@ export default function AIAssistantSection() {
             ))}
 
             {loading && (
-              <div className="flex items-center gap-2 text-xs font-mono text-cyber-cyan p-2 bg-space-card/60 rounded-xl border border-space-border/50 max-w-[70%]">
+              <div className="flex items-center gap-2 text-xs font-mono text-sky-700 dark:text-cyber-cyan p-2 bg-slate-100 dark:bg-space-card/60 rounded-xl border border-slate-300 dark:border-space-border/50 max-w-[70%]">
                 <Loader2 className="w-3.5 h-3.5 animate-spin" />
                 <span>Querying knowledge base...</span>
               </div>
@@ -213,12 +213,12 @@ export default function AIAssistantSection() {
           </div>
 
           {/* Preset Suggested Questions */}
-          <div className="px-3 py-2 bg-space-void/80 border-t border-space-border/40 overflow-x-auto flex gap-1.5 no-scrollbar">
+          <div className="px-3 py-2 bg-slate-100 dark:bg-space-void/80 border-t border-slate-200 dark:border-space-border/40 overflow-x-auto flex gap-1.5 no-scrollbar">
             {FAQ_PROMPTS.map((prompt, pIdx) => (
               <button
                 key={pIdx}
                 onClick={() => handleSendPrompt(prompt)}
-                className="text-[10px] font-mono whitespace-nowrap px-2.5 py-1 rounded-full bg-space-surface border border-space-border text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors"
+                className="text-[10px] font-mono whitespace-nowrap px-2.5 py-1 rounded-full bg-white dark:bg-space-surface border border-slate-300 dark:border-space-border text-slate-700 dark:text-slate-300 hover:text-cyber-cyan hover:border-cyber-cyan/50 transition-colors shadow-sm dark:shadow-none"
               >
                 {prompt}
               </button>
@@ -226,14 +226,14 @@ export default function AIAssistantSection() {
           </div>
 
           {/* Input Bar */}
-          <div className="p-3 bg-space-dark border-t border-space-border/60 flex items-center gap-2">
+          <div className="p-3 bg-slate-50 dark:bg-space-dark border-t border-slate-200 dark:border-space-border/60 flex items-center gap-2">
             <input
               type="text"
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendPrompt()}
               placeholder="Ask about Sheryar's skills, games, 3D art..."
-              className="flex-1 px-3 py-2 rounded-xl bg-space-surface border border-space-border/80 focus:border-cyber-cyan focus:outline-none text-xs font-mono text-slate-100 placeholder:text-slate-500"
+              className="flex-1 px-3 py-2 rounded-xl bg-white dark:bg-space-surface border border-slate-300 dark:border-space-border/80 focus:border-cyber-cyan focus:outline-none text-xs font-mono text-slate-800 dark:text-slate-100 placeholder:text-slate-400 dark:placeholder:text-slate-500 shadow-sm dark:shadow-none"
             />
             <button
               onClick={() => handleSendPrompt()}

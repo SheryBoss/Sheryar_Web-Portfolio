@@ -85,15 +85,15 @@ export default function SkillsSection() {
                     <CategoryIcon className="w-5 h-5" />
                   </div>
                   <div>
-                    <h3 className="text-lg font-display font-bold text-white uppercase tracking-wide">
+                    <h3 className="text-lg font-display font-bold text-slate-900 dark:text-white uppercase tracking-wide">
                       {category.name}
                     </h3>
-                    <p className="text-[11px] text-slate-400 font-sans">
+                    <p className="text-[11px] text-slate-600 dark:text-slate-400 font-sans">
                       {category.description}
                     </p>
                   </div>
                 </div>
-                <span className="text-xs font-mono text-slate-400">
+                <span className="text-xs font-mono text-slate-500 dark:text-slate-400">
                   {category.skills.length} TOOLS
                 </span>
               </div>
@@ -102,19 +102,19 @@ export default function SkillsSection() {
                 {category.skills.map((skill, idx) => (
                   <div key={idx} className="space-y-1.5">
                     <div className="flex items-center justify-between text-xs font-mono">
-                      <span className="text-slate-200 font-medium flex items-center gap-2">
+                      <span className="text-slate-800 dark:text-slate-200 font-medium flex items-center gap-2">
                         <span>{skill.name}</span>
                         {skill.type === 'primary' && (
-                          <span className="text-[9px] px-1.5 py-0.2 rounded bg-cyber-cyan/10 text-cyber-cyan border border-cyber-cyan/30">
+                          <span className="text-[9px] px-1.5 py-0.2 rounded bg-sky-100 dark:bg-cyber-cyan/10 text-sky-800 dark:text-cyber-cyan border border-sky-300 dark:border-cyber-cyan/30">
                             CORE
                           </span>
                         )}
                       </span>
-                      <span className="text-slate-400 text-[11px]">{skill.experience}</span>
+                      <span className="text-slate-500 dark:text-slate-400 text-[11px]">{skill.experience}</span>
                     </div>
 
                     {/* Proficiency Meter */}
-                    <div className="w-full h-2 bg-space-void rounded-full overflow-hidden border border-space-border/40">
+                    <div className="w-full h-2 bg-slate-200 dark:bg-space-void rounded-full overflow-hidden border border-slate-300 dark:border-space-border/40">
                       <div
                         className="h-full rounded-full transition-all duration-1000 ease-out"
                         style={{

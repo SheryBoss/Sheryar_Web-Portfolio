@@ -87,14 +87,14 @@ export default function PromotionalVideoSection() {
     <section id="promotional-video" className="relative py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto scroll-mt-20">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-violet/10 border border-cyber-violet/30 text-cyber-violet text-xs font-mono font-semibold">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-100 dark:bg-cyber-violet/10 border border-purple-300 dark:border-cyber-violet/30 text-purple-800 dark:text-cyber-violet text-xs font-mono font-semibold shadow-sm dark:shadow-none">
           <Film className="w-3.5 h-3.5" />
           <span>MODULE 3 // AFTER EFFECTS MOTION REEL</span>
         </div>
-        <h2 className="text-3xl sm:text-5xl font-gaming font-bold uppercase tracking-tight text-white">
-          PROMOTIONAL <span className="text-cyber-cyan glow-text-cyan">VIDEO</span>
+        <h2 className="text-3xl sm:text-5xl font-gaming font-bold uppercase tracking-tight text-slate-900 dark:text-white">
+          PROMOTIONAL <span className="text-sky-600 dark:text-cyber-cyan glow-text-cyan">VIDEO</span>
         </h2>
-        <p className="text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
+        <p className="text-slate-700 dark:text-slate-300 font-sans text-sm sm:text-base leading-relaxed">
           40-second promotional motion graphics trailer encoded in standard H.264 (yuv420p) progressive format. Click anywhere on the player to start playback.
         </p>
       </div>

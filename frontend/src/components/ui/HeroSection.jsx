@@ -20,26 +20,26 @@ export default function HeroSection() {
       <div className="max-w-7xl mx-auto w-full my-auto py-6">
         <div className="max-w-2xl space-y-6">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyber-cyan/10 border border-cyber-cyan/30 text-cyber-cyan text-xs font-mono font-semibold pointer-events-auto">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 dark:bg-cyber-cyan/10 border border-sky-300 dark:border-cyber-cyan/30 text-sky-800 dark:text-cyber-cyan text-xs font-mono font-semibold pointer-events-auto shadow-sm dark:shadow-none">
               <span>NEDUET &bull; BSCS GAMING & ANIMATION &bull; CGPA 3.5</span>
             </div>
             
             <h1 className="text-4xl sm:text-6xl lg:text-7xl font-gaming font-extrabold tracking-tight uppercase leading-none">
-              <span className="block text-white">DEVELOPER'S</span>
-              <span className="block bg-gradient-to-r from-cyber-cyan via-sky-300 to-cyber-violet bg-clip-text text-transparent glow-text-cyan">
+              <span className="block text-slate-900 dark:text-white">DEVELOPER'S</span>
+              <span className="block bg-gradient-to-r from-sky-600 via-cyan-600 to-indigo-600 dark:from-cyber-cyan dark:via-sky-300 dark:to-cyber-violet bg-clip-text text-transparent glow-text-cyan">
                 UNIVERSE
               </span>
             </h1>
             
-            <p className="text-xl sm:text-2xl font-gaming text-cyber-blue font-semibold pt-1 tracking-wide">
+            <p className="text-xl sm:text-2xl font-gaming text-sky-700 dark:text-cyber-blue font-semibold pt-1 tracking-wide">
               {PLACEHOLDERS.STUDENT_NAME} &bull;{' '}
-              <span className="text-slate-300 font-sans font-normal text-base">
+              <span className="text-slate-600 dark:text-slate-300 font-sans font-normal text-base">
                 {PLACEHOLDERS.TITLE}
               </span>
             </p>
           </div>
 
-          <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-sans max-w-xl bg-space-dark/75 backdrop-blur-md p-4 rounded-xl border border-space-border/60">
+          <p className="text-sm sm:text-base text-slate-800 dark:text-slate-300 leading-relaxed font-sans max-w-xl bg-white/95 dark:bg-space-dark/75 backdrop-blur-md p-4 rounded-xl border border-slate-300 dark:border-space-border/60 shadow-lg dark:shadow-none">
             Welcome to my interactive digital portfolio. Explore my games in Unreal Engine 5 & Unity (ShipBrawl, Dungeon Escape, Defenders), Blender 3D art, promotional video trailer, and grounded portfolio AI companion.
           </p>
 
@@ -55,7 +55,7 @@ export default function HeroSection() {
 
             <button
               onClick={() => scrollTo('promotional-video')}
-              className="px-5 py-3 rounded-xl text-xs sm:text-sm font-gaming font-semibold text-slate-200 bg-space-card hover:bg-space-surface border border-cyber-violet/50 hover:border-cyber-violet hover:shadow-glow-violet transition-all flex items-center gap-2 group"
+              className="px-5 py-3 rounded-xl text-xs sm:text-sm font-gaming font-semibold text-slate-800 dark:text-slate-200 bg-white dark:bg-space-card hover:bg-slate-100 dark:hover:bg-space-surface border border-slate-300 dark:border-cyber-violet/50 hover:border-cyber-violet dark:hover:border-cyber-violet shadow-md dark:shadow-none hover:shadow-glow-violet transition-all flex items-center gap-2 group"
             >
               <Play className="w-4 h-4 text-cyber-violet fill-cyber-violet/30 group-hover:scale-110 transition-transform" />
               <span>WATCH VIDEO REEL</span>
@@ -65,7 +65,7 @@ export default function HeroSection() {
               href={PLACEHOLDERS.WHATSAPP_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-5 py-3 rounded-xl text-xs sm:text-sm font-gaming font-semibold text-emerald-300 bg-emerald-950/60 border border-emerald-500/50 hover:bg-emerald-500 hover:text-black transition-all flex items-center gap-2"
+              className="px-5 py-3 rounded-xl text-xs sm:text-sm font-gaming font-semibold text-emerald-800 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 border border-emerald-300 dark:border-emerald-500/50 hover:bg-emerald-500 hover:text-white dark:hover:text-black transition-all flex items-center gap-2 shadow-md dark:shadow-none"
             >
               <span>💬</span>
               <span>WHATSAPP CHAT</span>

@@ -140,17 +140,17 @@ export default function ContactSection() {
 
           <div className="space-y-4">
             {/* WhatsApp Item */}
-            <div className="flex items-start gap-3 p-3 rounded-xl bg-emerald-950/20 border border-emerald-500/30">
-              <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
+            <div className="flex items-start gap-3 p-3 rounded-xl bg-emerald-50 dark:bg-emerald-950/20 border border-emerald-300 dark:border-emerald-500/30 shadow-sm dark:shadow-none">
+              <div className="p-2 rounded-lg bg-emerald-100 dark:bg-emerald-500/20 text-emerald-700 dark:text-emerald-400">
                 <MessageSquare className="w-4 h-4" />
               </div>
               <div className="flex-1">
-                <div className="text-[10px] font-mono text-emerald-400 font-bold">WHATSAPP DIRECT</div>
+                <div className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-bold">WHATSAPP DIRECT</div>
                 <a
                   href={PLACEHOLDERS.WHATSAPP_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-mono text-emerald-300 hover:underline flex items-center gap-1 mt-0.5"
+                  className="text-xs font-mono text-emerald-800 dark:text-emerald-300 hover:underline flex items-center gap-1 mt-0.5"
                 >
                   <span>{PLACEHOLDERS.WHATSAPP_NUMBER}</span>
                   <ArrowUpRight className="w-3 h-3" />
@@ -159,15 +159,15 @@ export default function ContactSection() {
             </div>
 
             {/* Email Item */}
-            <div className="flex items-start gap-3 p-3 rounded-xl bg-space-void/80 border border-cyber-cyan/30">
-              <div className="p-2 rounded-lg bg-cyber-cyan/10 text-cyber-cyan">
+            <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-space-void/80 border border-slate-200 dark:border-cyber-cyan/30 shadow-sm dark:shadow-none">
+              <div className="p-2 rounded-lg bg-sky-100 dark:bg-cyber-cyan/10 text-sky-700 dark:text-cyber-cyan">
                 <Mail className="w-4 h-4" />
               </div>
               <div className="flex-1">
-                <div className="text-[10px] font-mono text-cyber-cyan font-bold">PRIMARY EMAIL</div>
+                <div className="text-[10px] font-mono text-sky-700 dark:text-cyber-cyan font-bold">PRIMARY EMAIL</div>
                 <a
                   href={`mailto:${PLACEHOLDERS.EMAIL}`}
-                  className="text-xs font-mono text-slate-200 hover:text-cyber-cyan hover:underline flex items-center gap-1 mt-0.5 break-all"
+                  className="text-xs font-mono text-slate-800 dark:text-slate-200 hover:text-cyber-cyan hover:underline flex items-center gap-1 mt-0.5 break-all"
                 >
                   <span>{PLACEHOLDERS.EMAIL}</span>
                 </a>
@@ -175,25 +175,25 @@ export default function ContactSection() {
             </div>
 
             {/* University Item */}
-            <div className="flex items-start gap-3 p-3 rounded-xl bg-space-void/80 border border-cyber-violet/30">
-              <div className="p-2 rounded-lg bg-cyber-violet/10 text-cyber-violet">
+            <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-space-void/80 border border-slate-200 dark:border-cyber-violet/30 shadow-sm dark:shadow-none">
+              <div className="p-2 rounded-lg bg-purple-100 dark:bg-cyber-violet/10 text-purple-700 dark:text-cyber-violet">
                 <University className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] font-mono text-cyber-violet font-bold">UNIVERSITY & SPECIALIZATION</div>
-                <div className="text-xs font-mono text-slate-200 mt-0.5">{PLACEHOLDERS.UNIVERSITY_NAME}</div>
-                <div className="text-[11px] font-mono text-slate-400">BSCS Gaming & Animation (CGPA 3.5)</div>
+                <div className="text-[10px] font-mono text-purple-700 dark:text-cyber-violet font-bold">UNIVERSITY & SPECIALIZATION</div>
+                <div className="text-xs font-mono text-slate-800 dark:text-slate-200 mt-0.5">{PLACEHOLDERS.UNIVERSITY_NAME}</div>
+                <div className="text-[11px] font-mono text-slate-600 dark:text-slate-400">BSCS Gaming & Animation (CGPA 3.5)</div>
               </div>
             </div>
 
             {/* Location Item */}
-            <div className="flex items-start gap-3 p-3 rounded-xl bg-space-void/80 border border-space-border">
-              <div className="p-2 rounded-lg bg-sky-500/10 text-sky-400">
+            <div className="flex items-start gap-3 p-3 rounded-xl bg-slate-50 dark:bg-space-void/80 border border-slate-200 dark:border-space-border shadow-sm dark:shadow-none">
+              <div className="p-2 rounded-lg bg-slate-200 dark:bg-sky-500/10 text-slate-700 dark:text-sky-400">
                 <MapPin className="w-4 h-4" />
               </div>
               <div>
-                <div className="text-[10px] font-mono text-slate-400 font-bold">LOCATION</div>
-                <div className="text-xs font-mono text-slate-200 mt-0.5">{PLACEHOLDERS.LOCATION}</div>
+                <div className="text-[10px] font-mono text-slate-600 dark:text-slate-400 font-bold">LOCATION</div>
+                <div className="text-xs font-mono text-slate-800 dark:text-slate-200 mt-0.5">{PLACEHOLDERS.LOCATION}</div>
               </div>
             </div>
           </div>
@@ -312,8 +312,8 @@ export default function ContactSection() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-slate-300">
-                    YOUR NAME <span className="text-cyber-cyan">*</span>
+                  <label className="text-xs font-mono text-slate-700 dark:text-slate-300">
+                    YOUR NAME <span className="text-sky-600 dark:text-cyber-cyan">*</span>
                   </label>
                   <input
                     type="text"
@@ -321,14 +321,14 @@ export default function ContactSection() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="Enter your name"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-space-surface border border-space-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-space-surface border border-slate-300 dark:border-space-border text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors shadow-sm dark:shadow-none"
                     required
                   />
                 </div>
 
                 <div className="space-y-1.5">
-                  <label className="text-xs font-mono text-slate-300">
-                    EMAIL ADDRESS <span className="text-cyber-cyan">*</span>
+                  <label className="text-xs font-mono text-slate-700 dark:text-slate-300">
+                    EMAIL ADDRESS <span className="text-sky-600 dark:text-cyber-cyan">*</span>
                   </label>
                   <input
                     type="email"
@@ -336,14 +336,14 @@ export default function ContactSection() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="name@company.com"
-                    className="w-full px-3.5 py-2.5 rounded-xl bg-space-surface border border-space-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors"
+                    className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-space-surface border border-slate-300 dark:border-space-border text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors shadow-sm dark:shadow-none"
                     required
                   />
                 </div>
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-mono text-slate-300">
+                <label className="text-xs font-mono text-slate-700 dark:text-slate-300">
                   SUBJECT
                 </label>
                 <input
@@ -352,13 +352,13 @@ export default function ContactSection() {
                   value={formData.subject}
                   onChange={handleChange}
                   placeholder="e.g. GameDev Collaboration, 3D Modeling, Job Opportunity"
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-space-surface border border-space-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-space-surface border border-slate-300 dark:border-space-border text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors shadow-sm dark:shadow-none"
                 />
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-xs font-mono text-slate-300">
-                  MESSAGE <span className="text-cyber-cyan">*</span>
+                <label className="text-xs font-mono text-slate-700 dark:text-slate-300">
+                  MESSAGE <span className="text-sky-600 dark:text-cyber-cyan">*</span>
                 </label>
                 <textarea
                   name="message"
@@ -366,7 +366,7 @@ export default function ContactSection() {
                   onChange={handleChange}
                   rows={4}
                   placeholder="Write your message here..."
-                  className="w-full px-3.5 py-2.5 rounded-xl bg-space-surface border border-space-border text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors resize-none"
+                  className="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-space-surface border border-slate-300 dark:border-space-border text-xs text-slate-800 dark:text-white placeholder-slate-400 dark:placeholder-slate-500 focus:outline-none focus:border-cyber-cyan transition-colors resize-none shadow-sm dark:shadow-none"
                   required
                 />
               </div>

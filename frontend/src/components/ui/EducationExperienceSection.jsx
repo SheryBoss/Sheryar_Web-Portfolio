@@ -52,21 +52,21 @@ export default function EducationExperienceSection() {
                   </div>
 
                   <div>
-                    <h4 className="text-base font-display font-bold text-white group-hover:text-cyber-cyan transition-colors">
+                    <h4 className="text-base font-display font-bold text-slate-900 dark:text-white group-hover:text-cyber-cyan transition-colors">
                       {item.degree}
                     </h4>
-                    <div className="text-xs font-mono text-slate-300 mt-0.5">
+                    <div className="text-xs font-mono text-slate-600 dark:text-slate-300 mt-0.5">
                       {item.institution}
                     </div>
-                    <div className="text-xs font-mono text-cyber-violet mt-0.5">
+                    <div className="text-xs font-mono text-purple-700 dark:text-cyber-violet mt-0.5 font-semibold">
                       {item.specialization} &bull; {item.gradeLabel || (item.degree.includes('Intermediate') ? 'Percentage' : 'CGPA')}: {item.grade || item.cgpa}
                     </div>
                   </div>
 
-                  <div className="space-y-1.5 pt-2 border-t border-space-border/40">
+                  <div className="space-y-1.5 pt-2 border-t border-slate-200 dark:border-space-border/40">
                     {item.highlights.map((h, hIdx) => (
-                      <div key={hIdx} className="text-xs text-slate-300 flex items-start gap-2">
-                        <span className="text-cyber-cyan font-mono">&rsaquo;</span>
+                      <div key={hIdx} className="text-xs text-slate-700 dark:text-slate-300 flex items-start gap-2">
+                        <span className="text-sky-600 dark:text-cyber-cyan font-mono font-bold">&rsaquo;</span>
                         <span>{h}</span>
                       </div>
                     ))}
@@ -79,9 +79,9 @@ export default function EducationExperienceSection() {
 
         {/* Right Column: Experience & Lab Milestones */}
         <div className="space-y-6">
-          <div className="flex items-center gap-2.5 pb-2 border-b border-space-border/60">
-            <Briefcase className="w-5 h-5 text-cyber-violet" />
-            <h3 className="text-xl font-display font-bold text-white uppercase tracking-wide">
+          <div className="flex items-center gap-2.5 pb-2 border-b border-slate-200 dark:border-space-border/60">
+            <Briefcase className="w-5 h-5 text-purple-600 dark:text-cyber-violet" />
+            <h3 className="text-xl font-display font-bold text-slate-900 dark:text-white uppercase tracking-wide">
               Development Milestones
             </h3>
           </div>
